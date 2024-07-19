@@ -30,9 +30,9 @@ for dir in src/*/; do
 
     while IFS= read -r -d '' path; do
 
-        # Name of file added to template.  Rmove one trailing
-        # underscore from file, used to protect `.gitignore`
-        f="${path#_}"
+        # Remove one leading `_` from each path name component:
+        f="${path/#_}"    # remove at leading position
+        f="${f//\/_/\/}"  # remove after a slash
 
         printf '{-# START_FILE %s #-}\n' "${f}"
         cat "${dir}/${path}"

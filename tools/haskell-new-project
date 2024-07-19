@@ -1,0 +1,34 @@
+#!/bin/bash
+set -u -e -C
+shopt -s failglob
+
+function err { echo $'\e[1;31m'"$@"$'\e[m' >&2; exit 1; }
+function warn { echo $'\e[1;35m'"$@"$'\e[m' >&2; }
+function info { echo $'\e[36m'"$@"$'\e[m'; }
+function run { printf '\e[1m$'; printf ' %q' "$@"; printf '\e[m\n'; "$@"; }
+
+if test -z "${1-}"; then
+    err "Need project name."
+fi
+
+
+d="$(dirname "${1}")"
+n="$(basename "${1}")"
+shift
+
+mkdir -p "${d}"
+cd "${d}"
+
+info 'Initialising from stack template'
+run stack new "${n}" "$@"
+cd "${n}"
+
+info 'Initialising with git defaults'
+git init
+git add .
+run git commit -m initial
+
+info 'Set stack build directory to temporary location'
+sw="$(mktemp -dt 'stack-work.XXXXXXXX')"
+ln -s "${sw}" .stack-work
+run stack build

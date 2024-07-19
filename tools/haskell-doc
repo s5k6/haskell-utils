@@ -1,0 +1,24 @@
+#!/bin/bash
+set -u -e -C
+shopt -s failglob
+
+function err { echo $'\e[1;31m'"$@"$'\e[m' >&2; exit 1; }
+function warn { echo $'\e[1;35m'"$@"$'\e[m' >&2; }
+function info { echo $'\e[36m'"$@"$'\e[m'; }
+function run { printf '\e[1m$'; printf ' %q' "$@"; printf '\e[m\n'; "$@"; }
+
+run stack build --haddock
+
+case "${1-}" in
+    pkg)
+        firefox "$(stack path --local-doc-root)/index.html"
+        ;;
+    dep)
+        firefox "$(stack path --local-doc-root)/all/index.html"
+        ;;
+    snap)
+        firefox "$(stack path --snapshot-doc-root)/index.html"
+        ;;
+    *)
+        echo 'Subcommands: pkg, dep, snap'
+esac
