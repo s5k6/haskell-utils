@@ -7,6 +7,25 @@ function hs {
 
     case "${cmd}" in
 
+        build)
+            stack build "$@"
+            ;;
+
+        doc)
+            haskell-doc "$@"
+            ;;
+
+        loop)
+            stack build --file-watch "$@"
+            ;;
+
+        new)
+            if haskell-new-project "${@}"; then
+                cd "${@}"
+                exec haskell-shell
+            fi
+            ;;
+
         sh)
             if test -v GHC_ENVIRONMENT; then
                 echo 'Found in environment: GHC_ENVIRONMENT'
@@ -23,23 +42,8 @@ function hs {
             exec haskell-shell "$@"
             ;;
 
-        new)
-            if haskell-new-project "${@}"; then
-                cd "${@}"
-                exec haskell-shell
-            fi
-            ;;
-
-        loop)
-            stack build --file-watch "$@"
-            ;;
-
-        doc)
-            haskell-doc "$@"
-            ;;
-
         *)
-            echo 'Subcommands: sh, new, loop, doc'
+            echo 'Subcommands: build, doc, loop, new, sh'
             return 1
             ;;
 
