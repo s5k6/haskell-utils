@@ -42,8 +42,12 @@ function hs {
             exec haskell-shell "$@"
             ;;
 
+        tags)
+            haskell-tags "$@"
+            ;;
+
         *)
-            echo 'Subcommands: build, doc, loop, new, sh'
+            echo 'Subcommands: build, doc, loop, new, sh, tags'
             return 1
             ;;
 
