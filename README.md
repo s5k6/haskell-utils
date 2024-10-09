@@ -2,6 +2,23 @@
 **Note: This is experimental.**
 
 
+Stack configuration
+===================
+
+    $ mkdir ~/.stack
+    $ cp -t ~/.stack/config.yaml stack_config.yaml
+
+Note: Exclude the subdirectories from backup.  It will exceed mutliple
+gigabytes!
+
+    $ t=~/.nobackup/_stack/
+    $ mkdir "$t"
+    $ for i in */ *.sqlite3*; do
+          mv "$i" "$t"
+          ln -s "$t/$i"
+      done
+
+
 Stack templates for Haskell projects
 ====================================
 

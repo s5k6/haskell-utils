@@ -1,0 +1,26 @@
+# This file contains default non-project-specific settings for Stack, used
+# in all projects. For more information about Stack's configuration, see
+# http://docs.haskellstack.org/en/stable/yaml_configuration/
+
+# The following parameters are used by 'stack new' to automatically fill fields
+# in the Cabal file. We recommend uncommenting them and filling them out if
+# you intend to use 'stack new'.
+# See https://docs.haskellstack.org/en/stable/yaml_configuration/#templates
+templates:
+  params:
+    author-name: Stefan Klinger
+    author-email: stefan.klinger@dlr.de
+
+    resolver: lts-22.33
+#    copyright:
+#    github-username:
+
+default-template: /home/klinger/prg/haskell-utils/hsfiles/stub.hsfiles
+
+# The following parameter specifies Stack's output styles; STYLES is a
+# colon-delimited sequence of key=value, where 'key' is a style name and
+# 'value' is a semicolon-delimited list of 'ANSI' SGR (Select Graphic
+# Rendition) control codes (in decimal). Use 'stack ls stack-colors --basic'
+# to see the current sequence.
+stack-colors: error=91:warning=33:info=30:debug=30:other-level=30:good=30:shell=30:file=30:url=30:dir=30:recommendation=30:current=30:target=30:module=30:package-component=30:secondary=30:highlight=30
+
