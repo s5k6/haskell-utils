@@ -2,6 +2,17 @@
 **Note: This is experimental.**
 
 
+Hoogle
+======
+
+Install `hoogle`.  It is available as Arch Linux package.
+
+    $ hoogle generate
+
+    $ hoogle server
+    $ firefox 'http://localhost:8080'
+
+
 Stack configuration
 ===================
 
