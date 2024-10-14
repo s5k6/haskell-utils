@@ -8,7 +8,7 @@ function hs {
     case "${cmd}" in
 
         build)
-            stack build "$@"
+            haskell-build "$@"
             ;;
 
         doc)
@@ -16,7 +16,7 @@ function hs {
             ;;
 
         loop)
-            stack build --file-watch "$@"
+            haskell-build --file-watch "$@"
             ;;
 
         new)

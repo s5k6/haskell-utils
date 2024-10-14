@@ -1,0 +1,25 @@
+#!/bin/bash
+set -u -e -C
+shopt -s failglob
+
+function err { echo $'\e[1;31m'"$@"$'\e[m' >&2; exit 1; }
+function warn { echo $'\e[1;35m'"$@"$'\e[m' >&2; }
+function info { echo $'\e[36m'"$@"$'\e[m'; }
+function runExec {
+    printf '\e[1m$'; printf ' %q' "$@"; printf '\e[m\n';
+    exec "$@";
+}
+
+
+if ! test -e stack.yaml; then
+    err 'Missing stack.yaml'
+fi
+
+if ! test -e .stack-work; then
+    info 'Set stack build directory to temporary location'
+    if test -h .stack-work; then rm .stack-work; fi  # remove stale symlink
+    sw="$(mktemp -dt 'stack-work.XXXXXXXX')"
+    ln -s "${sw}" .stack-work
+fi
+
+runExec stack build "$@"
