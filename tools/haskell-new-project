@@ -23,10 +23,14 @@ info 'Initialising from stack template'
 run stack new "${n}" "$@"
 cd "${n}"
 
-info 'Initialising with git defaults'
-git init
-git add .
-run git commit -m initial
+if repo="$(git rev-parse --show-toplevel 2>/dev/null)"; then
+    warn "Already in git repo: ${repo}"
+else
+    info 'Initialising with git defaults'
+    git init
+    git add .
+    run git commit -m initial
+fi
 
 info 'Set stack build directory to temporary location'
 sw="$(mktemp -dt 'stack-work.XXXXXXXX')"
