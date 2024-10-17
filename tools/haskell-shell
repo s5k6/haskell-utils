@@ -2,6 +2,10 @@
 set -u -e -C
 shopt -s failglob
 
+
+haskell-tempdir "${1:-.}"
+
+
 # remove cruft from environment
 
 PATH="$(echo "${PATH//:/$'\n'}" | grep -vE '.stack' | paste -s -d:)"

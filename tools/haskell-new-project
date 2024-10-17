@@ -32,7 +32,6 @@ else
     run git commit -m initial
 fi
 
-info 'Set stack build directory to temporary location'
-sw="$(mktemp -dt 'stack-work.XXXXXXXX')"
-ln -s "${sw}" .stack-work
+haskell-tempdir
+
 run stack build
