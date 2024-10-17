@@ -27,7 +27,9 @@ function hs {
             ;;
 
         sh)
-            if test -v GHC_ENVIRONMENT; then
+            if test "${1-}" = -f; then
+                shift 1
+            elif test -v GHC_ENVIRONMENT; then
                 echo 'Found in environment: GHC_ENVIRONMENT'
                 return 1
             fi
