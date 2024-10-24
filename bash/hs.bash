@@ -10,25 +10,25 @@ function hs {
     case "${cmd}" in
 
         build)
-            "${HASKELL_UTILS_PATH}/haskell-build" "$@"
+            "${HASKELL_UTILS_PATH}/hs-build" "$@"
             ;;
 
         clean)
-            "${HASKELL_UTILS_PATH}/haskell-clean"
+            "${HASKELL_UTILS_PATH}/hs-clean"
             ;;
 
         doc)
-            "${HASKELL_UTILS_PATH}/haskell-doc" "$@"
+            "${HASKELL_UTILS_PATH}/hs-doc" "$@"
             ;;
 
         loop)
-            "${HASKELL_UTILS_PATH}/haskell-build" --file-watch "$@"
+            "${HASKELL_UTILS_PATH}/hs-build" --file-watch "$@"
             ;;
 
         new)
-            if "${HASKELL_UTILS_PATH}/haskell-new-project" "${@}"; then
+            if "${HASKELL_UTILS_PATH}/hs-new-project" "${@}"; then
                 cd "${@}"
-                exec "${HASKELL_UTILS_PATH}/haskell-shell"
+                exec "${HASKELL_UTILS_PATH}/hs-shell"
             fi
             ;;
 
@@ -47,11 +47,11 @@ function hs {
                 return 1
             fi
 
-            exec "${HASKELL_UTILS_PATH}/haskell-shell" "$@"
+            exec "${HASKELL_UTILS_PATH}/hs-shell" "$@"
             ;;
 
         tags)
-            "${HASKELL_UTILS_PATH}/haskell-tags" "$@"
+            "${HASKELL_UTILS_PATH}/hs-tags" "$@"
             ;;
 
         *)

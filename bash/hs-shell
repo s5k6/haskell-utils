@@ -6,7 +6,7 @@ HASKELL_UTILS_PATH="${BASH_SOURCE%/*}"
 
 
 
-"${HASKELL_UTILS_PATH}/haskell-tempdir" "${1:-.}"
+"${HASKELL_UTILS_PATH}/hs-tempdir" "${1:-.}"
 
 
 

@@ -85,13 +85,13 @@ like
 
     function hs {
         unset hs
-        if source '/path/to/stack-templates/tools/haskell-bashrc'; then
+        if source /path/to/haskell-utils/bash/hs.bash; then
             hs "$@"
         fi
     }
 
-to your `~/.bashrc`, which only loads `haskell-bashrc` on first use of
-the `hs` function.  Of course, modify the path as required.
+to your `~/.bashrc`, which only loads `hs.bashrc` on first use of the
+`hs` function.  Of course, modify the path as required.
 
 
 New project

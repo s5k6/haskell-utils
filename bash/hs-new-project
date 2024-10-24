@@ -33,6 +33,6 @@ else
     run git commit -m initial
 fi
 
-"${HASKELL_UTILS_PATH}/haskell-tempdir"
+"${HASKELL_UTILS_PATH}/hs-tempdir"
 
 run stack build
