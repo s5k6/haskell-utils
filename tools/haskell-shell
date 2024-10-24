@@ -2,8 +2,12 @@
 set -u -e -C
 shopt -s failglob
 
+HASKELL_UTILS_PATH="${BASH_SOURCE%/*}"
 
-haskell-tempdir "${1:-.}"
+
+
+"${HASKELL_UTILS_PATH}/haskell-tempdir" "${1:-.}"
+
 
 
 # remove cruft from environment
@@ -15,6 +19,7 @@ unset HASKELL_PACKAGE_SANDBOX \
       STACK_EXE HASKELL_DIST_DIR \
       GHC_ENVIRONMENT \
       GHC_PACKAGE_PATH
+
 
 
 echo 'Replacing shell…'

@@ -14,6 +14,8 @@ if ! test -e stack.yaml; then
     err 'Missing stack.yaml'
 fi
 
-haskell-tempdir
+HASKELL_UTILS_PATH="${BASH_SOURCE%/*}"
+
+"${HASKELL_UTILS_PATH}/haskell-tempdir"
 
 runExec stack build "$@"

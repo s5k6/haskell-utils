@@ -1,5 +1,7 @@
 # -*- shell-script -*-
 
+HASKELL_UTILS_PATH="${BASH_SOURCE%/*}"
+
 function hs {
 
     cmd="${1:-help}"
@@ -8,25 +10,25 @@ function hs {
     case "${cmd}" in
 
         build)
-            haskell-build "$@"
+            "${HASKELL_UTILS_PATH}/haskell-build" "$@"
             ;;
 
         clean)
-            haskell-clean
+            "${HASKELL_UTILS_PATH}/haskell-clean"
             ;;
 
         doc)
-            haskell-doc "$@"
+            "${HASKELL_UTILS_PATH}/haskell-doc" "$@"
             ;;
 
         loop)
-            haskell-build --file-watch "$@"
+            "${HASKELL_UTILS_PATH}/haskell-build" --file-watch "$@"
             ;;
 
         new)
-            if haskell-new-project "${@}"; then
+            if "${HASKELL_UTILS_PATH}/haskell-new-project" "${@}"; then
                 cd "${@}"
-                exec haskell-shell
+                exec "${HASKELL_UTILS_PATH}/haskell-shell"
             fi
             ;;
 
@@ -45,15 +47,15 @@ function hs {
                 return 1
             fi
 
-            exec haskell-shell "$@"
+            exec "${HASKELL_UTILS_PATH}/haskell-shell" "$@"
             ;;
 
         tags)
-            haskell-tags "$@"
+            "${HASKELL_UTILS_PATH}/haskell-tags" "$@"
             ;;
 
         *)
-            echo 'Subcommands: build, doc, loop, new, sh, tags'
+            echo 'Subcommands: build, clean, doc, loop, new, sh, tags'
             return 1
             ;;
 

@@ -11,6 +11,7 @@ if test -z "${1-}"; then
     err "Need project name."
 fi
 
+HASKELL_UTILS_PATH="${BASH_SOURCE%/*}"
 
 d="$(dirname "${1}")"
 n="$(basename "${1}")"
@@ -32,6 +33,6 @@ else
     run git commit -m initial
 fi
 
-haskell-tempdir
+"${HASKELL_UTILS_PATH}/haskell-tempdir"
 
 run stack build
