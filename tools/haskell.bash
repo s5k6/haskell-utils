@@ -11,6 +11,10 @@ function hs {
             haskell-build "$@"
             ;;
 
+        clean)
+            haskell-clean
+            ;;
+
         doc)
             haskell-doc "$@"
             ;;

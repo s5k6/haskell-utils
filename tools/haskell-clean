@@ -1,0 +1,8 @@
+#!/bin/bash
+set -u -e -C
+shopt -s failglob
+
+if test -h .stack-work; then
+    echo "Only removing symlink to: $(readlink .stack-work)"
+fi
+rm -r .stack-work
