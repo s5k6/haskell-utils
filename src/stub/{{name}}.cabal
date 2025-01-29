@@ -23,6 +23,10 @@ common shared
                      , LambdaCase
                     -- , OverloadedStrings
 
+  mixins:              base hiding ( Control.Concurrent, Control.Exception
+                                   , Control.Concurrent.STM )
+                       -- reather use UnliftIO, see [1]
+
 common devel
   import:              shared
   ghc-options:         -Wall
@@ -55,6 +59,7 @@ executable {{name}}
   --other-modules:
 
   build-depends:       base
+                    -- , unliftio
                     -- , attoparsec
                     -- , bytestring
                     -- , containers
@@ -63,3 +68,7 @@ executable {{name}}
                     -- , robust-int
                     -- , shuntingYard
                     -- , text
+
+
+-- Notes
+-- [1]: https://hackage.haskell.org/package/unliftio-0.2.25.0#readme
