@@ -8,21 +8,27 @@ function info { echo $'\e[36m'"$@"$'\e[m'; }
 function run { printf '\e[1m$'; printf ' %q' "$@"; printf '\e[m\n'; "$@"; }
 
 if test -z "${1-}"; then
-    err "Need project name."
+    err 'Need project name, or try `.` for this directory.'
 fi
 
 HASKELL_UTILS_PATH="${BASH_SOURCE%/*}"
 
-d="$(dirname "${1}")"
-n="$(basename "${1}")"
+if test "${1}" = .; then
+    n="$(basename "$(pwd)")"
+else
+    n="$(basename "${1}")"
+    mkdir -p "${1}"
+    cd "${1}"
+fi
 shift
 
-mkdir -p "${d}"
-cd "${d}"
+if (shopt -s failglob dotglob; : *) 2>/dev/null; then
+    err 'Directory is not empty'
+fi
 
 info 'Initialising from stack template'
-run stack new "${n}" "$@"
-cd "${n}"
+run stack new --bare "${n}" "$@"
+
 
 if repo="$(git rev-parse --show-toplevel 2>/dev/null)"; then
     warn "Already in git repo: ${repo}"
