@@ -1,0 +1,28 @@
+#!/bin/bash
+set -u -e -C
+shopt -s failglob
+
+function err { echo $'\e[1;31m'"$@"$'\e[m' >&2; exit 1; }
+function run { printf '\e[1m$'; printf ' %q' "$@"; printf '\e[m\n'; "$@"; }
+
+if ! test -e stack.yaml; then
+    err 'Missing stack.yaml'
+fi
+
+if x="$(readlink .stack-work)"; then
+   rm .stack-work
+   if test -d "${x}"; then
+       run mv "$x" .stack-work
+   else
+       run mkdir .stack-work
+   fi
+else
+    if test -d .stack-work; then
+        echo 'Already a directory: .stack-work'
+    elif test -e .stack-work; then
+        err 'Not a symlink: .stack-work'
+    else
+        run mkdir .stack-work
+    fi
+fi
+

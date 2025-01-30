@@ -21,6 +21,10 @@ function hs {
             "${HASKELL_UTILS_PATH}/hs-doc" "$@"
             ;;
 
+        keep)
+            "${HASKELL_UTILS_PATH}/hs-keep" "$@"
+            ;;
+
         loop)
             "${HASKELL_UTILS_PATH}/hs-build" --file-watch "$@"
             ;;
@@ -55,7 +59,7 @@ function hs {
             ;;
 
         *)
-            echo 'Subcommands: build, clean, doc, loop, new, sh, tags'
+            echo 'Subcommands: build, clean, doc, keep, loop, new, sh, tags'
             return 1
             ;;
 
