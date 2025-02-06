@@ -37,6 +37,7 @@ else
     git init
     git add .
     run git commit -m initial
+    git switch -c devel
 fi
 
 "${HASKELL_UTILS_PATH}/hs-tempdir"

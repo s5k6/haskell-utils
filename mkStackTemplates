@@ -18,14 +18,14 @@ function ask_yN {
 }
 
 
-outdir=hsfiles
+outdir=.hsfiles
 
 mkdir -p "${outdir}"
 
-for dir in src/*/; do
+for dir in templates/*/; do
 
     # name of the template
-    t="${dir#src/}"
+    t="${dir#templates/}"
     t="${t%/}"
 
     while IFS= read -r -d '' path; do

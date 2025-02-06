@@ -40,7 +40,7 @@ template files by running:
 
     $ ./mkStackTemplates
 
-Each directory `./src/foo` yields a template `hsfiles/foo.hsfiles`,
+Each directory `./src/foo` yields a template `.hsfiles/foo.hsfiles`,
 with `foo` substituted consistently.
 
 The files in `./src/foo` will show up in the template, with the
@@ -61,7 +61,7 @@ your `~/.stack/config.yaml`:
 
         resolver: zzz
 
-    default-template: /path/to/repo/hsfiles/stub.hsfiles
+    default-template: /path/to/repo/.hsfiles/stub.hsfiles
 
 Pay particular attention to the “resolver” to be used by `stack`.
 This is the one to be used initially for all newly created projects.

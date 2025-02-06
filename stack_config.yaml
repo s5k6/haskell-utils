@@ -17,7 +17,7 @@ templates:
 #    copyright:
 #    github-username:
 
-default-template: /home/klinger/prg/haskell-utils/hsfiles/stub.hsfiles
+default-template: /home/klinger/prg/haskell-utils/.hsfiles/stub.hsfiles
 
 
 # The following parameter specifies Stack's output styles; STYLES is a
