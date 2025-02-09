@@ -13,7 +13,7 @@ packages:
 #extra-deps:
 #
 #  - git: https://github.com/s5k6/robust-int
-#    commit: 3e3216ded51bd973cb5d6ba25dccf50445d53011
+#    commit: 354985343cc642492181afe2fe7fde3e39c157ed
 #
 #  - git: https://github.com/s5k6/shuntingYard
-#    commit: 325753ddc3ce92ae497d1d8574e5147ec573eab8
+#    commit: 6173fbe4877abe48516966accaf57b027b205b6c
