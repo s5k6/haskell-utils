@@ -8,9 +8,15 @@ function info { echo $'\e[36m'"$@"$'\e[m'; }
 
 cd "${1:-.}"
 
-if ! test -e .stack-work; then
+work='.stack-work'
+
+if ! test -e "${work}"; then
     info 'Set stack build directory to temporary location'
-    if test -h .stack-work; then rm .stack-work; fi  # remove stale symlink
+    if test -h "${work}"; then rm "${work}"; fi  # remove stale symlink
     sw="$(mktemp -dt 'stack-work.XXXXXXXX')"
-    ln -s "${sw}" .stack-work
+    ln -s "${sw}" "${work}"
+fi
+
+if ! test -h "${work}"; then
+    warn "Not a symlink: ${work}"
 fi

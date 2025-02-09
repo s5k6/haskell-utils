@@ -1,0 +1,21 @@
+#!/bin/bash
+set -u -e -C
+shopt -s failglob
+
+function err { echo $'\e[1;31m'"$@"$'\e[m' >&2; exit 1; }
+function warn { echo $'\e[1;35m'"$@"$'\e[m' >&2; }
+function info { echo $'\e[36m'"$@"$'\e[m'; }
+function runExec {
+    printf '\e[1m$'; printf ' %q' "$@"; printf '\e[m\n';
+    exec "$@";
+}
+
+if ! test -e stack.yaml; then
+    err 'Missing stack.yaml'
+fi
+
+HASKELL_UTILS_PATH="${BASH_SOURCE%/*}"
+
+"${HASKELL_UTILS_PATH}/hs-tempdir"
+
+runExec stack sdist --pvp-bounds both "$@"

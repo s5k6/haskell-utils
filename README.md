@@ -135,6 +135,16 @@ To convert a symlink `.stack-work` into a real directory, *moving* its
 contents.  If absent, an empty directory is created.
 
 
+Testing
+-------
+
+    $ hs test -- ARGS…
+
+Runs `stack test --ta STRING`, with `STRING` being a sorry attempt to
+pass all `ARGS` to the test suite.  See [stack issue #2210][3] for a
+discussion of this.
+
+
 
 Existing projects
 -----------------
@@ -173,5 +183,17 @@ Docs
 
 
 
+Create source distribution tarballs
+-----------------------------------
+
+    $ hs sdist
+
+I mainly use this to check the package for mistakes.  This allso
+passes `--pvp-bounds` in order to add the version limits to the
+produced `.cabal` file.
+
+
+
 [1]: https://docs.haskellstack.org/en/stable/templates_command/
 [2]: https://www.stackage.org/snapshots
+[3]: https://github.com/commercialhaskell/stack/issues/2210

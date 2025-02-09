@@ -1,0 +1,45 @@
+#!/bin/bash
+set -u -e -C
+shopt -s failglob
+
+function err { echo $'\e[1;31m'"$@"$'\e[m' >&2; exit 1; }
+function warn { echo $'\e[1;35m'"$@"$'\e[m' >&2; }
+function info { echo $'\e[36m'"$@"$'\e[m'; }
+function runExec {
+    printf '\e[1m$'; printf ' %q' "$@"; printf '\e[m\n';
+    exec "$@";
+}
+
+if ! test -e stack.yaml; then
+    err 'Missing stack.yaml'
+fi
+
+HASKELL_UTILS_PATH="${BASH_SOURCE%/*}"
+
+"${HASKELL_UTILS_PATH}/hs-tempdir"
+
+# NOTE: The way `stack test` handles arguments is broken.  It uses its
+# own logic to break the string passed to `--ta` into components, it
+# doees have a notion of quotes (used below) but I have not found
+# documentation.
+
+left=()
+right=()
+args=( "${@}" )
+doubledash=false
+
+for (( i = 0; i < "${#args[@]}"; i++ )); do
+    if test "${args[$i]}" = '--'; then
+        left=( "${args[@]:0:$i}" )
+        right=( "${args[@]:$((i+1))}" )
+        doubledash=true
+        break
+    fi
+done
+
+if "${doubledash}"; then
+    printf -v args ' "%s"' "${right[@]}"
+    runExec stack test "${left[@]}" --ta "${args}"
+else
+    runExec stack test "${args[@]}"
+fi

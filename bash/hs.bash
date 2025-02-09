@@ -36,6 +36,10 @@ function hs {
             fi
             ;;
 
+        sdist)
+            "${HASKELL_UTILS_PATH}/hs-sdist" "$@"
+            ;;
+
         sh)
             if test "${1-}" = -f; then
                 shift 1
@@ -58,8 +62,14 @@ function hs {
             "${HASKELL_UTILS_PATH}/hs-tags" "$@"
             ;;
 
+        test)
+            "${HASKELL_UTILS_PATH}/hs-test" "$@"
+            ;;
+
         *)
-            echo 'Subcommands: build, clean, doc, keep, loop, new, sh, tags'
+            cat <<'.'
+Subcommands: build, clean, doc, keep, loop, new, sdist, sh, tags, test
+.
             return 1
             ;;
 
